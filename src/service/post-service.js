@@ -1,7 +1,6 @@
 const PostService = {
   /**
    * Loads posts from api
-   * @typedef {{id: number; body: string; title: string; userId: number}} Post
    * @returns {Promise<Array<Post>>}
    */
   getPosts: async () => {
