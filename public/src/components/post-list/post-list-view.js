@@ -54,7 +54,7 @@ class PostListView extends HTMLElement {
 
     const groupedButton = document.createElement("button");
     groupedButton.setAttribute("id", "grouped_button");
-    groupedButton.textContent = `Grouped: ${this.grouped}`;
+    groupedButton.textContent = `Grouped: ${this.grouped ? "Yes" : "No"}`;
     groupedButton.addEventListener("click", () => {
       this.controller.toggleGrouped();
     });
@@ -62,7 +62,7 @@ class PostListView extends HTMLElement {
 
     const sortedButton = document.createElement("button");
     sortedButton.setAttribute("id", "sorted_button");
-    sortedButton.textContent = `Sorted: ${this.sorted}`;
+    sortedButton.textContent = `Sorted: ${this.sorted ? "Yes" : "No"}`;
     sortedButton.addEventListener("click", () => {
       this.controller.toggleSorted();
     });
@@ -86,10 +86,19 @@ class PostListView extends HTMLElement {
       return;
     }
 
-    let finalPosts = posts;
-    if (this.sorted) {
-      finalPosts = postsSortedByTitle(finalPosts);
-    }
+    let finalPosts = [...posts].sort((a, b) => {
+      if (this.grouped) {
+        if (a.userId === b.userId && this.sorted) {
+          return a.title > b.title ? 1 : -1;
+        }
+
+        return a.userId > b.userId ? 1 : -1;
+      } else if (this.sorted) {
+        return a.title > b.title ? 1 : -1;
+      }
+
+      return 0;
+    });
 
     finalPosts.forEach((post) => {
       const postComponent = document.createElement("post-item");

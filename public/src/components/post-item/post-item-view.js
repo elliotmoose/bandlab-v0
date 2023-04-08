@@ -10,9 +10,9 @@ class PostItemView extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <li class="post-item-container">        
+        <span>user id: ${this.post?.userId}</span>
         <h3>${this.post?.title}</h3>
-        <span>${this.post?.body}</span>
-        <span>${this.post?.userId}</span>
+        <p>${this.post?.body}</p>
       </li>
     `;
   }
