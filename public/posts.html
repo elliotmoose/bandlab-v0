@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bandlab v0.0 - Posts</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="posts.css" />
+
+    <script src="/src/service/post-service.js"></script>
+    <script src="/src/components/post-list/post-list-view.js"></script>
+    <script src="/src/components/post-list/post-list-controller.js"></script>
+    <script src="/src/components/post-item/post-item-view.js"></script>
+    <script src="/src/components/nav-bar/nav-bar.js"></script>
+    <script src="/src/utils/post-utils.js"></script>
+  </head>
+  <script>
+    function refreshList() {
+      /**
+       * @type {PostListView}
+       */
+      const postList = document.querySelector("post-list");
+      const postListController = postList.controller;
+      postListController.loadPosts();
+    }
+
+    function toggleGrouped() {
+      /**
+       * @type {PostListView}
+       */
+      const postList = document.querySelector("post-list");
+      const postListController = postList.controller;
+      postListController.toggleGrouped();
+    }
+    function toggleSorted() {
+      /**
+       * @type {PostListView}
+       */
+      const postList = document.querySelector("post-list");
+      const postListController = postList.controller;
+      postListController.toggleSorted();
+    }
+  </script>
+  <body>
+    <nav-bar />
+    <post-list />
+  </body>
+</html>

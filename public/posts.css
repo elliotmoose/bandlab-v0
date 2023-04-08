@@ -1,31 +1,12 @@
-html,
-body,
-ul,
-ol,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
-  font-family: "Helvetica Neue", sans-serif;
-}
-
-.nav-bar {
+.action-bar {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
-.nav-bar li {
-  list-style: none;
-  margin-right: 12px;
+.action-bar button {
+  margin-left: 12px;
 }
 
 .post-list-container {
@@ -33,14 +14,14 @@ h6 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 1rem;
+  padding-top: 16px;
 }
 
 .post-item-container {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   border-radius: 12px;
   max-width: 320px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

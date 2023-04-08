@@ -1,4 +1,4 @@
-class PostItemComponent extends HTMLElement {
+class PostItemView extends HTMLElement {
   /**
    * @type {Post | null}
    */
@@ -18,4 +18,4 @@ class PostItemComponent extends HTMLElement {
   }
 }
 
-customElements.define("post-item", PostItemComponent);
+customElements.define("post-item", PostItemView);
