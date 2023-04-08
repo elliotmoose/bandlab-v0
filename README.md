@@ -10,9 +10,11 @@ The server will run on :3000, where you can visit http://127.0.0.1:3000/posts or
 
 The project structure is as such:
 
+```
 |- view (\*.html, web components \*-view.js) - rendering focused
 |-- controllers (\*-controller.js) - state management and data logic
 |--- services - interfacing with APIs
+```
 
 Not quite familiar with plain html/js development so I decided to go with an MVC like approach
 
