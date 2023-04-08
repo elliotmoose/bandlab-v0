@@ -12,33 +12,6 @@
     <script src="/src/components/nav-bar/nav-bar.js"></script>
     <script src="/src/utils/post-utils.js"></script>
   </head>
-  <script>
-    function refreshList() {
-      /**
-       * @type {PostListView}
-       */
-      const postList = document.querySelector("post-list");
-      const postListController = postList.controller;
-      postListController.loadPosts();
-    }
-
-    function toggleGrouped() {
-      /**
-       * @type {PostListView}
-       */
-      const postList = document.querySelector("post-list");
-      const postListController = postList.controller;
-      postListController.toggleGrouped();
-    }
-    function toggleSorted() {
-      /**
-       * @type {PostListView}
-       */
-      const postList = document.querySelector("post-list");
-      const postListController = postList.controller;
-      postListController.toggleSorted();
-    }
-  </script>
   <body>
     <nav-bar />
     <post-list />

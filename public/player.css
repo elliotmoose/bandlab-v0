@@ -1,0 +1,36 @@
+.audio-resources-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.audio-resource-item {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.audio-resource-item span {
+  font-weight: bold;
+}
+
+.audio-resource-item button {
+  border: none;
+  background-color: tomato;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 12px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.audio-resource-item button:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
