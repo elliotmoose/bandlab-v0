@@ -22,8 +22,9 @@ class SamplePlayerView extends HTMLElement {
       audioName.textContent = audioPath.split("/").pop();
       audioResourceItem.appendChild(audioName);
 
+      const isPlaying = this.controller.isAudioPlaying(audioPath);
       const playButton = document.createElement("button");
-      playButton.textContent = "Play";
+      playButton.textContent = isPlaying ? "Stop" : "Play";
       playButton.addEventListener("click", () => {
         this.controller.playAudio(audioPath);
       });

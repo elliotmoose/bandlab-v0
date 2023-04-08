@@ -9,26 +9,73 @@ class SamplePlayerController {
    */
   view;
 
+  /**
+   * @type {{ [audioName: string]: { isPlaying: boolean; source: AudioBufferSourceNode; audioBuffer: AudioBuffer; }}}
+   */
+  state = {};
+
+  /**
+   * @type {string[]} list of path names
+   */
+  audioResources = [];
+
   constructor(view) {
     this.view = view;
   }
 
   async playAudio(audioPath) {
     this.initIfNeeded();
-    // load audio file
-    const audioData = await AudioService.loadAudio(audioPath);
-    this.context.decodeAudioData(audioData, (buffer) => {
-      // create a new source
-      const source = this.context.createBufferSource();
-      source.buffer = buffer;
-      source.connect(this.context.destination);
-      source.start();
-    });
+
+    const isPlaying =
+      this.state[audioPath] !== undefined &&
+      this.state[audioPath].isPlaying === true;
+
+    if (!isPlaying) {
+      let audioBuffer = this.state[audioPath]?.audioBuffer;
+      const needsLoading = audioBuffer === undefined;
+
+      if (needsLoading) {
+        // load audio file
+        try {
+          const audioData = await AudioService.loadAudio(audioPath);
+          audioBuffer = await this.context.decodeAudioData(audioData);
+        } catch (error) {
+          console.error("decode audio buffer failed:", error);
+          return;
+        }
+      }
+
+      if (audioBuffer) {
+        // create a new source
+        const source = this.context.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(this.context.destination);
+        source.start();
+
+        this.state[audioPath] = {
+          isPlaying: true,
+          audioBuffer,
+          source,
+        };
+      }
+    } else {
+      // cleanup old source
+      this.state[audioPath].source.disconnect(this.context.destination);
+      this.state[audioPath].isPlaying = false;
+    }
+
+    // update view
+    this.view.renderAudioResources(this.audioResources);
+  }
+
+  isAudioPlaying(audioPath) {
+    return this.state[audioPath]?.isPlaying === true;
   }
 
   async loadAudioResources() {
-    const audioPaths = await AudioService.getAudioResources();
-    this.view.renderAudioResources(audioPaths);
+    const audioResources = await AudioService.getAudioResources();
+    this.audioResources = audioResources;
+    this.view.renderAudioResources(audioResources);
   }
 
   initIfNeeded() {

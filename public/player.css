@@ -17,20 +17,3 @@
 .audio-resource-item span {
   font-weight: bold;
 }
-
-.audio-resource-item button {
-  border: none;
-  background-color: tomato;
-  border-radius: 8px;
-  padding: 8px 16px;
-  margin-top: 12px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.audio-resource-item button:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
-}

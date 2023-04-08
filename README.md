@@ -10,6 +10,7 @@ A few assumptions I made during this assignment:
 
 - grouping + sorting are both allowed to be turned on simulataneously
   - in that case, grouping has a higher priority than sorting (because otherwise it would appera that grouping is not working)
+- only ascending sort
 - primarily a frontend assignment, so:
   - sorting, grouping done on frontend (ideally should be backend for when data scales)
   - JSONPlaceholder called directly from client
