@@ -19,12 +19,24 @@ class SamplePlayerController {
    */
   audioResources = [];
 
+  /**
+   *
+   * @param {SamplePlayerView} view
+   */
   constructor(view) {
     this.view = view;
   }
 
+  /**
+   * @param {string} audioPath
+   */
   async playAudio(audioPath) {
     this.initIfNeeded();
+
+    if (!this.context) {
+      console.error("cannot play without audio context");
+      return;
+    }
 
     const isPlaying =
       this.state[audioPath] !== undefined &&
@@ -68,6 +80,10 @@ class SamplePlayerController {
     this.view.renderAudioResources(this.audioResources);
   }
 
+  /**
+   *
+   * @param {string} audioPath
+   */
   isAudioPlaying(audioPath) {
     return this.state[audioPath]?.isPlaying === true;
   }

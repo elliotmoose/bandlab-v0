@@ -6,11 +6,11 @@ const fs = require("fs");
 app.use(express.static("public"));
 
 app.get("/posts", (req, res) => {
-  res.sendFile(__dirname + "/public/posts.html");
+  res.sendFile(__dirname + "/public/src/pages/posts/posts.html");
 });
 
 app.get("/player", (req, res) => {
-  res.sendFile(__dirname + "/public/player.html");
+  res.sendFile(__dirname + "/public/src/pages/player/player.html");
 });
 
 app.get("/audio", (req, res) => {

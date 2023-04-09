@@ -3,6 +3,11 @@ class SamplePlayerView extends HTMLElement {
    * @type {SamplePlayerController}
    */
   controller;
+
+  /**
+   * @type {HTMLOListElement}
+   */
+  container;
   constructor() {
     super();
     this.controller = new SamplePlayerController(this);
@@ -19,7 +24,7 @@ class SamplePlayerView extends HTMLElement {
       audioResourceItem.setAttribute("class", "audio-resource-item");
 
       const audioName = document.createElement("span");
-      audioName.textContent = audioPath.split("/").pop();
+      audioName.textContent = audioPath.split("/").pop() ?? audioPath;
       audioResourceItem.appendChild(audioName);
 
       const isPlaying = this.controller.isAudioPlaying(audioPath);

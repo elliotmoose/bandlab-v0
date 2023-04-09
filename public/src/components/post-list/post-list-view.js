@@ -3,8 +3,11 @@ class PostListView extends HTMLElement {
     return ["sorted", "grouped"];
   }
 
+  /**
+   * Trigger rerender when attributes change
+   */
   attributeChangedCallback(name, oldValue, newValue) {
-    this.renderPosts(this.posts, this.sorted, this.grouped);
+    this.renderPosts(this.posts);
   }
 
   get sorted() {
@@ -16,14 +19,14 @@ class PostListView extends HTMLElement {
   }
 
   /**
-   * @type {Post[]}
+   * @type {Post[] | null}
    */
   posts = [];
 
   /**
-   * @type {HTMLDivElement}
+   * @type {HTMLOListElement}
    */
-  _container;
+  container;
 
   /**
    * @type {PostListController}
@@ -32,17 +35,17 @@ class PostListView extends HTMLElement {
 
   constructor() {
     super();
+    // attach controller
     this.controller = new PostListController(this);
   }
 
-  renderClear() {
-    this.container.innerHTML = "";
-  }
-
+  /**
+   * Render refresh, grouped, and sort buttons
+   */
   _renderActionBar() {
     const actionBar = document.createElement("div");
     actionBar.setAttribute("class", "action-bar");
-    this.container.appendChild(actionBar);
+    this.container?.appendChild(actionBar);
 
     const refreshButton = document.createElement("button");
     refreshButton.setAttribute("id", "refresh_button");
@@ -70,11 +73,11 @@ class PostListView extends HTMLElement {
   }
 
   /**
-   * Tell DOM to render posts
+   * Render posts items
    * @param {Post[] | null} posts
    */
   renderPosts(posts) {
-    this.renderClear(); // have space for future optimisation. see README.md
+    this.container.innerHTML = ""; // have space for future optimisation. see README.md
     this._renderActionBar();
 
     this.posts = posts;
@@ -101,18 +104,26 @@ class PostListView extends HTMLElement {
     });
 
     finalPosts.forEach((post) => {
-      const postComponent = document.createElement("post-item");
+      const postComponent = /** @type {PostItemComponent} */ (
+        document.createElement("post-item")
+      );
       postComponent.post = post;
       this.container.appendChild(postComponent);
     });
   }
 
+  /**
+   * Render a simple loading message
+   */
   renderLoading() {
-    this.renderClear(); // have space for future optimisation. see README.md
+    this.container.innerHTML = ""; // have space for future optimisation. see README.md
     this._renderActionBar();
     this.container.innerHTML = "loading...";
   }
 
+  /**
+   * When component mounted, create container and attach styles
+   */
   connectedCallback() {
     this.container = document.createElement("ol");
     this.container.setAttribute("class", "post-list-container");

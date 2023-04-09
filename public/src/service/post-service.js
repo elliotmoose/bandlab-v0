@@ -1,7 +1,7 @@
 const PostService = {
   /**
    * Loads posts from api
-   * @returns {Promise<Array<Post>>}
+   * @returns {Promise<Array<Post> | null>}
    */
   getPosts: async () => {
     try {
