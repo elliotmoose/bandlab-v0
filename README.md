@@ -28,6 +28,7 @@ A few assumptions I made during this assignment:
 - primarily a frontend assignment, so:
   - sorting, grouping done on frontend (ideally should be backend for when data scales)
   - JSONPlaceholder called directly from client
+- no need to display user data (username etc) as this is usually more efficient to be joined on the api side
 
 Future improvements:
 
